@@ -1,0 +1,1 @@
+Work on Timepunch post request (Still getting "Failed to fetch" error), however I did have the posts working (right now they are not working and punches arent being added - could revert the "Access-control" shit in the views.py and frontend to get it working again)
