@@ -4,15 +4,16 @@ from rest_framework.decorators import api_view
 from .models import Employee, TimePunch
 from .serializers import EmployeeSerializer, TimePunchSerializer
 
+
 class EmployeeAPIView(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
-    
+
 
 class TimePunchAPIView(viewsets.ModelViewSet):
     queryset = TimePunch.objects.all()
     serializer_class = TimePunchSerializer
-    
+
     def create(self, request):
         print(request.data)
         serializer = TimePunchSerializer(data=request.data)
@@ -20,4 +21,9 @@ class TimePunchAPIView(viewsets.ModelViewSet):
             serializer.save()
             response = Response(serializer.data)
             return response
-        return Response(serializer.errors, status=400)
+        return Response(serializer.errors, status=200)
+
+    def update(self, request, pk):
+        timepunch = TimePunch.objects.get(id=pk)
+        serializer = TimePunchSerializer(timepunch)
+        print('data: ', serializer.data)

@@ -17,8 +17,9 @@ class TimePunch(models.Model):
     location = models.CharField(max_length=25, default='Office')
     total_earned = models.FloatField(default=None)
     paid = models.BooleanField(default=False)
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    employee_name = models.CharField(max_length=25, default='')
+    employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     
     
     def __str__(self):
-        return self.employee.name
+        return self.employee_name
